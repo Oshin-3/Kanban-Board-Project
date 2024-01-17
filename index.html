@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kanban Board</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+    <script src="https://kit.fontawesome.com/b50e187756.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="navbar-container">
+        <div class="search-container">
+            <!-- <p>Search</p> -->
+        </div>
+        <div class="filter-container">
+            <!-- <p>Filter</p> -->
+        </div>
+        <div class="add-task-button-container">
+            <button type="button" id="add-task-button" class="btn_primary">Add Task <span><i class="fa-solid fa-plus"></i></span></button>
+        </div>
+        
+    </div>
+    <hr />
+    <div class="board-container">
+        <div class="title-container">
+            <div class="title" data-category="open">
+                <p>Open</p>
+                <span class="counter" id="open-counter">0</span>
+            </div>
+            <div class="title" data-category="inProcess">
+                <p>In Progress</p>
+                <span class="counter" id="inProcess-counter">0</span>
+            </div>
+            <div class="title" data-category="review">
+                <p>Review</p>
+                <span class="counter" id="review-counter">0</span>
+            </div>
+            <div class="title" data-category="blocked">
+                <p>Blocked</p>
+                <span class="counter" id="review-counter">0</span>
+            </div>
+            <div class="title" data-category="close">
+                <p>Close</p>
+                <span class="counter" id="close-counter">0</span>
+            </div>
+        </div>
+
+        <div class="modal-container">
+            <div class="form-container">
+                <form class="task-form">
+                    <div class="task-name">
+                        <input type="text" placeholder="Task Name or Type" class="task-details">
+                    </div>
+                    <div class="task-description">
+                        <input type="text" placeholder="Add Description" class="task-details">
+                    </div>
+                    <div class="task-filters-container">
+                        <div class="task task-category">
+                            <select class="task-filer" id="category">
+                                <option value="category" selected>Category</option>
+                                <option value="open"><i class="fa-solid fa-circle"></i> Open</option>
+                                <option value="inProcess"><i class="fa-solid fa-circle"></i> In Progress</option>
+                                <option value="review"><i class="fa-solid fa-circle"></i> Review</option>
+                                <option value="blocked"><i class="fa-solid fa-circle"></i> Blocked</option>
+                                <option value="close"><i class="fa-solid fa-circle"></i> Close</option>
+                            </select>
+                        </div>
+                        <div class="task task-duedate">
+                            <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Due Date" class="task-filer">
+                        </div>
+                        <div class="task task-priority">
+                            <select class="task-filer" id="priority">
+                                <option value="priority" selected>Priority</option>
+                                <option value="urgent"><i class="fa-solid fa-flag"></i> Urgent</option>
+                                <option value="high"><i class="fa-solid fa-flag"></i> High</option>
+                                <option value="normal"><i class="fa-solid fa-flag"></i> Normal</option>
+                                <option value="low"><i class="fa-solid fa-flag"></i> Low</option>
+                            </select>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="task-create-button">
+                        <input type="button" id="createTask" class="btn_primary" value="Create Task" >
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="tasks-container">
+            <div class="tasks" data-category="open"></div>
+            <div class="tasks" data-category="inProcess"></div>
+            <div class="tasks" data-category="review"></div>
+            <div class="tasks" data-category="blocked"></div>
+            <div class="tasks" data-category="close"></div>
+        </div>        
+    </div>
+
+
+</body>
+</html>
