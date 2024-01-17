@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <div class="modal-container">
+        <div class="modal-container hide">
             <div class="form-container">
                 <form class="task-form">
                     <div class="task-name">
@@ -57,17 +57,17 @@
                     </div>
                     <div class="task-filters-container">
                         <div class="task task-category">
-                            <select class="task-filer" id="category">
+                            <select class="task-filer" id="category-dropdown" name="category">
                                 <option value="category" selected>Category</option>
-                                <option value="open"><i class="fa-solid fa-circle"></i> Open</option>
-                                <option value="inProcess"><i class="fa-solid fa-circle"></i> In Progress</option>
-                                <option value="review"><i class="fa-solid fa-circle"></i> Review</option>
-                                <option value="blocked"><i class="fa-solid fa-circle"></i> Blocked</option>
-                                <option value="close"><i class="fa-solid fa-circle"></i> Close</option>
+                                <option value="open">Open</option>
+                                <option value="inProcess">In Progress</option>
+                                <option value="review">Review</option>
+                                <option value="blocked">Blocked</option>
+                                <option value="close">Close</option>
                             </select>
                         </div>
                         <div class="task task-duedate">
-                            <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Due Date" class="task-filer">
+                            <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" placeholder="Due Date" class="task-filer" id="due-date">
                         </div>
                         <div class="task task-priority">
                             <select class="task-filer" id="priority">
@@ -96,6 +96,8 @@
         </div>        
     </div>
 
+    <script src="script.js">
 
+    </script>
 </body>
 </html>
