@@ -72,10 +72,10 @@
                         <div class="task task-priority">
                             <select class="task-filer" id="priority">
                                 <option value="priority" selected>Priority</option>
-                                <option value="urgent"><i class="fa-solid fa-flag"></i> Urgent</option>
-                                <option value="high"><i class="fa-solid fa-flag"></i> High</option>
-                                <option value="normal"><i class="fa-solid fa-flag"></i> Normal</option>
-                                <option value="low"><i class="fa-solid fa-flag"></i> Low</option>
+                                <option value="urgent">Urgent</option>
+                                <option value="high">High</option>
+                                <option value="normal">Normal</option>
+                                <option value="low">Low</option>
                             </select>
                         </div>
                     </div>
@@ -88,16 +88,38 @@
         </div>
 
         <div class="tasks-container">
-            <div class="tasks" data-category="open"></div>
+            <div class="tasks" data-category="open">
+                <!-- <div class="ticket-container">
+                    <div class="tickets">
+                        <div class="ticket-name">
+                            <p style="font-weight: bold;">Task 1</p>
+                        </div>
+                        <div class="ticket-description">
+                            <p>Task 1 is created</p>
+                        </div>
+                        <div class="ticket-priority">
+                            <i class="fa-solid fa-flag low"></i>
+                        </div>
+                        <hr>
+                        <div class="ticket-due-date">
+                            <p><i class="fa-solid fa-calendar-days"></i> <span>2024-01-17</span></p>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
             <div class="tasks" data-category="inProcess"></div>
             <div class="tasks" data-category="review"></div>
             <div class="tasks" data-category="blocked"></div>
             <div class="tasks" data-category="close"></div>
-        </div>        
+
+            
+        </div>   
+        
+        
     </div>
 
     <script src="script.js">
-
+        
     </script>
 </body>
 </html>

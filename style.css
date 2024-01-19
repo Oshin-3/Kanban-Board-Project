@@ -15,6 +15,11 @@
     --block-category-color: #dc3545;
     --close-category-color: #28a745;
     --modal-background-color: #F7F7F7;
+    --board-width : 260px 260px 260px 260px 260px;
+    --urgent-task : #7D0A0A;
+    --high-task: #FF6C22;
+    --normal-task: #00A9FF;
+    --low-task: #61677A;
 }
 
 .navbar-container
@@ -49,7 +54,7 @@
 .title-container
 {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: var(--board-width);
     margin: var(--container-margin);
     column-gap: 20px;
     height: 30px;
@@ -106,7 +111,7 @@
 .tasks-container
 {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: var(--board-width);
     margin: var(--container-margin);
     column-gap: 20px;
 }
@@ -116,8 +121,60 @@
     width: 100%;
     height: 80vh;
     border-radius: var(--border-radius-fix);
-    background-color: #E5E4E2;
-    border: none;
+    background-color: #9DB2BF;
+}
+
+
+.ticket-container
+{
+    width: 250px;
+    height: 100px;
+    background-color: #DDE6ED;
+    position: relative;
+    z-index: 1;
+    align-items: center;
+    border-radius: var(--border-radius-fix);
+    left: 2%;
+    top: 3%;
+    font-size: 12px;
+    padding: 5px;
+    box-sizing: border-box;
+}
+
+.ticket-priority
+{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.ticket-description
+{
+    margin-top: 5px;
+}
+.ticket-due-date
+{
+    margin-top: 5px;
+    color: grey;
+}
+
+.urgent
+{
+    color:  var(--urgent-task);
+}
+
+.high
+{
+    color: var(--high-task);
+}
+
+.normal
+{
+    color: var(--normal-task);
+}
+
+.low
+{
+    color: var(--low-task);
 }
 
 .modal-container.hide
@@ -130,7 +187,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1;
+    z-index: 2;
     position: absolute;
     left: 50%;
     top: 50%;

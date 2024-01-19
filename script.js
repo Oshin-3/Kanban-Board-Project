@@ -1,8 +1,11 @@
 const addTaskButtonRef = document.getElementById('add-task-button');
 const modalRef = document.querySelector('.modal-container');
 const taskNameRef = document.querySelectorAll('.task-details');
+const createTaskRef = document.getElementById('createTask');
 
+const allTasks = (JSON.parse(localStorage.getItem('allTasks')) || []);
 
+// toggleModal code
 addTaskButtonRef.addEventListener('click', function(e)
 {
     toggleModal();
@@ -35,8 +38,11 @@ function defaultModal()
     taskNameRef.forEach((task) => {
         task.value = "";
     })
-
-    // const firstPriorityRef = document.querySelector('.task-filters-container .task .task-filer');
-    // //console.log(firstCategoryRef);
-    // firstPriorityRef.selectedIndex = 0;
 }
+// toggleModal code
+
+
+createTaskRef.addEventListener('click', function(e)
+{
+    
+});
