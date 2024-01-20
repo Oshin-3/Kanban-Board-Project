@@ -58,8 +58,8 @@
                     <div class="task-filters-container">
                         <div class="task task-category">
                             <select class="task-filer" id="category-dropdown" name="category">
-                                <option value="category" selected>Category</option>
-                                <option value="open">Open</option>
+                                <!-- <option value="category" selected>Category</option> -->
+                                <option value="open" selected>Open</option>
                                 <option value="inProcess">In Progress</option>
                                 <option value="review">Review</option>
                                 <option value="blocked">Blocked</option>
@@ -88,7 +88,7 @@
         </div>
 
         <div class="tasks-container">
-            <div class="tasks" data-category="open">
+            <div class="tasks" id="open-category-container">
                 <!-- <div class="ticket-container">
                     <div class="tickets">
                         <div class="ticket-name">
@@ -107,10 +107,10 @@
                     </div>
                 </div> -->
             </div>
-            <div class="tasks" data-category="inProcess"></div>
-            <div class="tasks" data-category="review"></div>
-            <div class="tasks" data-category="blocked"></div>
-            <div class="tasks" data-category="close"></div>
+            <div class="tasks" id="inProcess-category-container"></div>
+            <div class="tasks" id="review-category-container"></div>
+            <div class="tasks" id="blocked-category-container"></div>
+            <div class="tasks" id="close-category-container"></div>
 
             
         </div>   

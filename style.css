@@ -16,8 +16,8 @@
     --close-category-color: #28a745;
     --modal-background-color: #F7F7F7;
     --board-width : 260px 260px 260px 260px 260px;
-    --urgent-task : #7D0A0A;
-    --high-task: #FF6C22;
+    --urgent-task : #D71313;
+    --high-task: #FFC436;
     --normal-task: #00A9FF;
     --low-task: #61677A;
 }
@@ -139,6 +139,7 @@
     font-size: 12px;
     padding: 5px;
     box-sizing: border-box;
+    margin-top: 10px;
 }
 
 .ticket-priority
@@ -157,22 +158,22 @@
     color: grey;
 }
 
-.urgent
+#urgent
 {
     color:  var(--urgent-task);
 }
 
-.high
+#high
 {
     color: var(--high-task);
 }
 
-.normal
+#normal
 {
     color: var(--normal-task);
 }
 
-.low
+#low
 {
     color: var(--low-task);
 }
