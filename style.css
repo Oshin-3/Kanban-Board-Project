@@ -7,7 +7,7 @@
 
 :root
 {
-    --container-margin : 0 50px 0 50px;
+    --container-margin : 0 40px 0 40px;
     --border-radius-fix: 5px;
     --open-category-color: #343a40;
     --inprogress-category-color: #00308F;
@@ -15,7 +15,7 @@
     --block-category-color: #dc3545;
     --close-category-color: #28a745;
     --modal-background-color: #F7F7F7;
-    --board-width : 260px 260px 260px 260px 260px;
+    --board-width : 275px 275px 275px 275px 275px;
     --urgent-task : #D71313;
     --high-task: #FFC436;
     --normal-task: #00A9FF;
@@ -56,7 +56,7 @@
     display: grid;
     grid-template-columns: var(--board-width);
     margin: var(--container-margin);
-    column-gap: 20px;
+    column-gap: 10px;
     height: 30px;
     margin-top: 20px;
 }
@@ -113,7 +113,7 @@
     display: grid;
     grid-template-columns: var(--board-width);
     margin: var(--container-margin);
-    column-gap: 20px;
+    column-gap: 10px;
 }
 
 .tasks
@@ -122,6 +122,8 @@
     height: 80vh;
     border-radius: var(--border-radius-fix);
     background-color: #9DB2BF;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 
@@ -152,10 +154,18 @@
 {
     margin-top: 5px;
 }
+
 .ticket-due-date
 {
     margin-top: 5px;
     color: grey;
+    display: flex;
+    justify-content: space-between;
+}
+
+#delete-ticket
+{
+    cursor: pointer;
 }
 
 #urgent

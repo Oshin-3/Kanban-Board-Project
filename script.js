@@ -2,6 +2,7 @@ const addTaskButtonRef = document.getElementById('add-task-button');
 const modalRef = document.querySelector('.modal-container');
 const taskNameRef = document.querySelectorAll('.task-details');
 const createTaskRef = document.getElementById('createTask');
+const taskContainerRef = document.querySelector('.tasks-container');
 
 const kanbanTasks = (JSON.parse(localStorage.getItem('kanbanTasks')) || []);
 
@@ -54,6 +55,7 @@ createTaskRef.addEventListener('click', function(e)
 
     const task = 
     {
+        taskId : Math.random(),
         taskName : taskNameRef.value,
         taskDescription : taskDescriptionRef.value,
         category : taskCategoryRef.value,
@@ -93,6 +95,7 @@ function addTaskInCategory(task)
             <hr>
             <div class="ticket-due-date">
                 <p><i class="fa-solid fa-calendar-days"></i> <span>${task.dueDate}</span></p>
+                <span id="delete-ticket"><i class="fa-solid fa-trash"></i></span>
             </div>
         </div>
         `;
@@ -138,3 +141,27 @@ function renderTask()
 
 renderTask();
 //render task
+
+//delete ticket
+taskContainerRef.addEventListener('click', function(e)
+{
+    if (e.target.classList.contains('fa-trash'))
+    {
+        if (window.confirm('Are you sure you want to delete the task?'))
+        {
+            const ticketID = e.target.closest('.ticket-container');
+            console.log(ticketID);
+            ticketID.remove();
+            deleteTicketFromTheData(ticketID);
+        }
+
+    }
+});
+
+function deleteTicketFromTheData(ticketID)
+{
+    const selectedTask = kanbanTasks.findIndex((ticket) => ticket.taskId === ticketID);
+    kanbanTasks.splice(selectedTask, 1);
+    localStorage.setItem('kanbanTasks', JSON.stringify(kanbanTasks));
+}
+//delete ticket
