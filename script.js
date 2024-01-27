@@ -1,14 +1,25 @@
 const addTaskButtonRef = document.getElementById('add-task-button');
 const modalRef = document.querySelector('.modal-container');
-const taskNameRef = document.querySelectorAll('.task-details');
+const tasksRef = document.querySelectorAll('.task-details');
 const createTaskRef = document.getElementById('createTask');
+const editTaskRef = document.getElementById('editTask');
 const taskContainerRef = document.querySelector('.tasks-container');
+const tasknameRef = document.querySelector('.modal-container .form-container .task-form .task-name .task-details');
+const taskDescriptionRef = document.querySelector('.modal-container .form-container .task-form .task-description .task-details');
+const taskCategoryRef = document.getElementById('category-dropdown');
+const dueDateRef = document.getElementById('due-date');
+const priorityRef = document.getElementById('priority');
+
+//console.log(tasksRef.value, taskDescriptionRef.value, taskCategoryRef.options[taskCategoryRef.selectedIndex].value, dueDateRef.value, priorityRef.value);
+
 
 const kanbanTasks = (JSON.parse(localStorage.getItem('kanbanTasks')) || []);
 
 // toggleModal code
 addTaskButtonRef.addEventListener('click', function(e)
 {
+    editTaskRef.classList.add('hide');
+    createTaskRef.classList.remove('hide');
     toggleModal();
 });
 
@@ -36,7 +47,7 @@ function defaultModal()
         category.selectedIndex = 0;
     });
 
-    taskNameRef.forEach((task) => {
+    tasksRef.forEach((task) => {
         task.value = "";
     })
 }
@@ -45,18 +56,18 @@ function defaultModal()
 //create task
 createTaskRef.addEventListener('click', function(e)
 {
-    const taskNameRef = document.querySelector('.modal-container .form-container .task-form .task-name .task-details');
-    const taskDescriptionRef = document.querySelector('.modal-container .form-container .task-form .task-description .task-details');
-    const taskCategoryRef = document.getElementById('category-dropdown');
-    const dueDateRef = document.getElementById('due-date');
-    const priorityRef = document.getElementById('priority');
+    // const taskNameRef = document.querySelector('.modal-container .form-container .task-form .task-name .task-details');
+    // const taskDescriptionRef = document.querySelector('.modal-container .form-container .task-form .task-description .task-details');
+    // const taskCategoryRef = document.getElementById('category-dropdown');
+    // const dueDateRef = document.getElementById('due-date');
+    // const priorityRef = document.getElementById('priority');
 
-    console.log(taskNameRef.value, taskDescriptionRef.value, taskCategoryRef.options[taskCategoryRef.selectedIndex].value, dueDateRef.value, priorityRef.value);
+    // console.log(taskNameRef.value, taskDescriptionRef.value, taskCategoryRef.options[taskCategoryRef.selectedIndex].value, dueDateRef.value, priorityRef.value);
 
     const task = 
     {
         taskId : Math.random(),
-        taskName : taskNameRef.value,
+        taskName : tasknameRef.value,
         taskDescription : taskDescriptionRef.value,
         category : taskCategoryRef.value,
         dueDate : dueDateRef.value,
@@ -78,9 +89,10 @@ function addTaskInData(task)
 
 function addTaskInCategory(task)
 {
-    console.log("inside addTaskInCategory > ", task);
+    //console.log("inside addTaskInCategory > ", task);
     const ticketContainerRef = document.createElement('div');
     ticketContainerRef.classList.add('ticket-container');
+    ticketContainerRef.dataset.id = task.taskId;
     ticketContainerRef.innerHTML = `
         <div class="tickets">
             <div class="ticket-name">
@@ -93,9 +105,10 @@ function addTaskInCategory(task)
                 <i class="fa-solid fa-flag low" id="${task.priority}"></i>
             </div>
             <hr>
-            <div class="ticket-due-date">
-                <p><i class="fa-solid fa-calendar-days"></i> <span>${task.dueDate}</span></p>
-                <span id="delete-ticket"><i class="fa-solid fa-trash"></i></span>
+            <div class="ticket-edit-panel">
+                <div id="ticket-duedate"><p><i class="fa-solid fa-calendar-days"></i> <span>${task.dueDate}</span></p></div>
+                <span id="delete-ticket" title="Delete"><i class="fa-solid fa-trash"></i></span>
+                <span id="edit-ticket" title="Edit"><i class="fa-solid fa-pen"></i></span>
             </div>
         </div>
         `;
@@ -149,19 +162,63 @@ taskContainerRef.addEventListener('click', function(e)
     {
         if (window.confirm('Are you sure you want to delete the task?'))
         {
-            const ticketID = e.target.closest('.ticket-container');
-            console.log(ticketID);
-            ticketID.remove();
+            const ticketContainer= e.target.closest('.ticket-container');
+            const ticketID = ticketContainer.dataset.id;
+            //console.log(ticketID, ticketContainer);
+            ticketContainer.remove();
             deleteTicketFromTheData(ticketID);
         }
 
+    }
+
+    //edit ticket
+    if (e.target.classList.contains('fa-pen'))
+    {
+        const ticketID = e.target.closest('.ticket-container').dataset.id;
+        editTicket(ticketID);
     }
 });
 
 function deleteTicketFromTheData(ticketID)
 {
-    const selectedTask = kanbanTasks.findIndex((ticket) => ticket.taskId === ticketID);
+    const selectedTask = kanbanTasks.findIndex((ticket) => ticket.taskId == ticketID);
+    //console.log("ticket: ", ticketID)
     kanbanTasks.splice(selectedTask, 1);
     localStorage.setItem('kanbanTasks', JSON.stringify(kanbanTasks));
 }
 //delete ticket
+
+//edit ticket
+function editTicket(ticketID)
+{
+    toggleModal();
+    editTaskRef.classList.remove('hide');
+    createTaskRef.classList.add('hide');
+    const selectedTask = kanbanTasks.findIndex((ticket) => ticket.taskId == ticketID);
+    tasknameRef.value = kanbanTasks[selectedTask].taskName;
+    taskDescriptionRef.value = kanbanTasks[selectedTask].taskDescription;
+    taskCategoryRef.value = kanbanTasks[selectedTask].category;
+    dueDateRef.value = kanbanTasks[selectedTask].dueDate;
+    priorityRef.value = kanbanTasks[selectedTask].priority;
+
+    
+    editTaskRef.addEventListener('click', function(e)
+    {
+        console.log("Edit click");
+        
+        editTicketFromData(selectedTask);  
+        toggleModal();  
+        location.reload();
+    })
+}
+
+function editTicketFromData(selectedIndex)
+{
+    kanbanTasks[selectedIndex].taskName = tasknameRef.value;
+    kanbanTasks[selectedIndex].taskDescription = taskDescriptionRef.value;
+    kanbanTasks[selectedIndex].category = taskCategoryRef.value;
+    kanbanTasks[selectedIndex].dueDate = dueDateRef.value;
+    kanbanTasks[selectedIndex].priority = priorityRef.value;
+    localStorage.setItem('kanbanTasks', JSON.stringify(kanbanTasks));
+}
+//edit ticket

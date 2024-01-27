@@ -155,15 +155,26 @@
     margin-top: 5px;
 }
 
-.ticket-due-date
+.ticket-edit-panel
 {
     margin-top: 5px;
     color: grey;
     display: flex;
-    justify-content: space-between;
+    justify-content : space-between;
 }
 
+#ticket-duedate
+{
+    width: 200px;
+}
+
+
 #delete-ticket
+{
+    cursor: pointer;
+}
+
+#edit-ticket
 {
     cursor: pointer;
 }
@@ -288,4 +299,12 @@
     margin-top: 15px;
 }
 
+.task-create-button .editTask.hide
+{
+    display: none;
+}
 
+.task-create-button .createTask.hide
+{
+    display: none;
+}
