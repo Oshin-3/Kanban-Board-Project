@@ -9,11 +9,20 @@ const taskDescriptionRef = document.querySelector('.modal-container .form-contai
 const taskCategoryRef = document.getElementById('category-dropdown');
 const dueDateRef = document.getElementById('due-date');
 const priorityRef = document.getElementById('priority');
-
-//console.log(tasksRef.value, taskDescriptionRef.value, taskCategoryRef.options[taskCategoryRef.selectedIndex].value, dueDateRef.value, priorityRef.value);
-
-
+const cancelRef = document.getElementById('cancel-button');
+const countOpenRef = document.getElementById('open-counter');
+const countInProcessRef = document.getElementById('inProcess-counter');
+const countReviewRef = document.getElementById('review-counter');
+const countBlockedRef = document.getElementById('blocked-counter');
+const countCLosedRef = document.getElementById('close-counter');
+//console.log(tasksRef.value, taskDescriptionRef.value, taskCategoryRef.options[taskCategoryRef.selectedIndex].value, dueDateRef.value, priorityRef.value)
 const kanbanTasks = (JSON.parse(localStorage.getItem('kanbanTasks')) || []);
+
+let countOpen = 0;
+let countInProgress = 0;
+let countReview = 0;
+let countBlocked = 0;
+let countClosed = 0;
 
 // toggleModal code
 addTaskButtonRef.addEventListener('click', function(e)
@@ -53,6 +62,13 @@ function defaultModal()
 }
 // toggleModal code
 
+//cancel modal
+cancelRef.addEventListener('click', function(e){
+    // console.log('cancel button');
+    modalRef.classList.add('hide');
+})
+//cancel modal
+
 //create task
 createTaskRef.addEventListener('click', function(e)
 {
@@ -77,7 +93,7 @@ createTaskRef.addEventListener('click', function(e)
     addTaskInData(task);
     addTaskInCategory(task);
     toggleModal();
-    
+    location.reload();
 });
 
 function addTaskInData(task)
@@ -222,3 +238,37 @@ function editTicketFromData(selectedIndex)
     localStorage.setItem('kanbanTasks', JSON.stringify(kanbanTasks));
 }
 //edit ticket
+
+
+//adding counter
+
+kanbanTasks.forEach((tasks) => {
+    if (tasks.category === 'open')
+    {
+        countOpen += 1;
+    }
+    if (tasks.category === 'inProcess')
+    {
+        countInProgress += 1;
+    }
+    if (tasks.category === 'review')
+    {
+        countReview += 1;
+    }
+    if (tasks.category === 'blocked')
+    {
+        countBlocked += 1;
+    }
+    if (tasks.category === 'close')
+    {
+        countClosed += 1;
+    }
+})
+
+countOpenRef.innerText = countOpen;
+countInProcessRef.innerText = countInProgress;
+countReviewRef.innerText = countReview;
+countBlockedRef.innerText = countBlocked;
+countCLosedRef.innerText = countClosed;
+
+//adding counter

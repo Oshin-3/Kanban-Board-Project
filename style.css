@@ -114,6 +114,7 @@
     grid-template-columns: var(--board-width);
     margin: var(--container-margin);
     column-gap: 10px;
+    
 }
 
 .tasks
@@ -214,6 +215,14 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+}
+
+.fa-xmark
+{
+    float: right;
+    margin-right: 20px;
+    margin-top: 10px;
+    color: #61677A;
 }
 
 .form-container
