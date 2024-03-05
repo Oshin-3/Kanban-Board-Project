@@ -15,6 +15,12 @@ const countInProcessRef = document.getElementById('inProcess-counter');
 const countReviewRef = document.getElementById('review-counter');
 const countBlockedRef = document.getElementById('blocked-counter');
 const countCLosedRef = document.getElementById('close-counter');
+const searchRef = document.getElementById('search');
+const openCategoryRef = document.getElementById('open-category-container');
+const inProcessCategoryRef = document.getElementById('inProcess-category-container');
+const reviewCategoryRef = document.getElementById('review-category-container');
+const blockedCategoryRef = document.getElementById('blocked-category-container');
+const closeCategoryRef = document.getElementById('close-category-container');
 //console.log(tasksRef.value, taskDescriptionRef.value, taskCategoryRef.options[taskCategoryRef.selectedIndex].value, dueDateRef.value, priorityRef.value)
 const kanbanTasks = (JSON.parse(localStorage.getItem('kanbanTasks')) || []);
 
@@ -129,11 +135,11 @@ function addTaskInCategory(task)
         </div>
         `;
 
-    const openCategoryRef = document.getElementById('open-category-container');
-    const inProcessCategoryRef = document.getElementById('inProcess-category-container');
-    const reviewCategoryRef = document.getElementById('review-category-container');
-    const blockedCategoryRef = document.getElementById('blocked-category-container');
-    const closeCategoryRef = document.getElementById('close-category-container');
+    // const openCategoryRef = document.getElementById('open-category-container');
+    // const inProcessCategoryRef = document.getElementById('inProcess-category-container');
+    // const reviewCategoryRef = document.getElementById('review-category-container');
+    // const blockedCategoryRef = document.getElementById('blocked-category-container');
+    // const closeCategoryRef = document.getElementById('close-category-container');
 
     //console.log(task.category);
     if (task.category === 'open')
@@ -165,10 +171,12 @@ function renderTask()
     kanbanTasks.forEach((task) =>
     {
         addTaskInCategory(task);   
+        renderTaskCount(task);
     })
 }
 
 renderTask();
+// renderTaskCount();
 //render task
 
 //delete ticket
@@ -242,33 +250,64 @@ function editTicketFromData(selectedIndex)
 
 //adding counter
 
-kanbanTasks.forEach((tasks) => {
-    if (tasks.category === 'open')
-    {
-        countOpen += 1;
-    }
-    if (tasks.category === 'inProcess')
-    {
-        countInProgress += 1;
-    }
-    if (tasks.category === 'review')
-    {
-        countReview += 1;
-    }
-    if (tasks.category === 'blocked')
-    {
-        countBlocked += 1;
-    }
-    if (tasks.category === 'close')
-    {
-        countClosed += 1;
-    }
-})
-
-countOpenRef.innerText = countOpen;
-countInProcessRef.innerText = countInProgress;
-countReviewRef.innerText = countReview;
-countBlockedRef.innerText = countBlocked;
-countCLosedRef.innerText = countClosed;
+function renderTaskCount(tasks)
+{
+    // kanbanTasks.forEach((tasks) => {
+        if (tasks.category === 'open')
+        {
+            countOpen += 1;
+        }
+        if (tasks.category === 'inProcess')
+        {
+            countInProgress += 1;
+        }
+        if (tasks.category === 'review')
+        {
+            countReview += 1;
+        }
+        if (tasks.category === 'blocked')
+        {
+            countBlocked += 1;
+        }
+        if (tasks.category === 'close')
+        {
+            countClosed += 1;
+        }
+    // })
+    
+    countOpenRef.innerText = countOpen;
+    countInProcessRef.innerText = countInProgress;
+    countReviewRef.innerText = countReview;
+    countBlockedRef.innerText = countBlocked;
+    countCLosedRef.innerText = countClosed;
+}
 
 //adding counter
+
+
+//search
+searchRef.addEventListener('keyup', function(e)
+{
+    console.log(e.target.value);
+    openCategoryRef.innerHTML = " ";
+    inProcessCategoryRef.innerHTML = " ";
+    reviewCategoryRef.innerHTML = " ";
+    blockedCategoryRef.innerHTML = " ";
+    closeCategoryRef.innerHTML = " ";
+    countOpen = 0;
+    countInProgress = 0;
+    countReview = 0;
+    countBlocked = 0;
+    countClosed = 0;
+
+    kanbanTasks.forEach((tasks) => {
+        const currentTitle = tasks.taskName.toLowerCase();
+        const searchText = e.target.value.toLowerCase();
+        if (currentTitle.includes(searchText))
+        {
+            addTaskInCategory(tasks);
+            renderTaskCount(tasks);
+        }
+    })
+    
+})

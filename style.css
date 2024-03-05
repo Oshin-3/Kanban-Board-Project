@@ -317,3 +317,28 @@
 {
     display: none;
 }
+
+.search-container
+{
+    width: 240px;
+    height: 35px;
+    margin-right: 10px;
+    display: flex;
+}
+
+.search-details
+{
+    width: 90%;
+    height: 100%;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid lightgray;
+    padding: 5px;
+}
+
+.fa-solid.fa-magnifying-glass
+{
+    padding-top: 10px;
+    padding-right: 5px;
+    color: lightgray;
+}
