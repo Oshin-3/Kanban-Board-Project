@@ -111,6 +111,7 @@ function addTaskInData(task)
 
 function addTaskInCategory(task)
 {
+    console.log(task.taskName.length);
     //console.log("inside addTaskInCategory > ", task);
     const ticketContainerRef = document.createElement('div');
     ticketContainerRef.classList.add('ticket-container');
@@ -118,7 +119,7 @@ function addTaskInCategory(task)
     ticketContainerRef.innerHTML = `
         <div class="tickets">
             <div class="ticket-name">
-                <p style="font-weight: bold;">${task.taskName}</p>
+                <p style="font-weight: bold;">${task.taskName.length > 50 ? task.taskName.slice(0, 36) + ' ...' : task.taskName }</p>
             </div>
             <div class="ticket-description">
                 <p>${task.taskDescription}</p>
@@ -289,7 +290,7 @@ function renderTaskCount(tasks)
 //search
 searchRef.addEventListener('keyup', function(e)
 {
-    console.log(e.target.value);
+    //console.log(e.target.value);
     openCategoryRef.innerHTML = " ";
     inProcessCategoryRef.innerHTML = " ";
     reviewCategoryRef.innerHTML = " ";
