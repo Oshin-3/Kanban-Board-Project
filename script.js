@@ -209,6 +209,7 @@ function deleteTicketFromTheData(ticketID)
     //console.log("ticket: ", ticketID)
     kanbanTasks.splice(selectedTask, 1);
     localStorage.setItem('kanbanTasks', JSON.stringify(kanbanTasks));
+    location.reload();
 }
 //delete ticket
 
@@ -302,8 +303,11 @@ searchRef.addEventListener('keyup', function(e)
 
     kanbanTasks.forEach((tasks) => {
         const currentTitle = tasks.taskName.toLowerCase();
+        const currentDescription = tasks.taskDescription.toLowerCase();
         const searchText = e.target.value.toLowerCase();
-        if (currentTitle.includes(searchText))
+
+        
+        if (currentTitle.includes(searchText) || currentDescription.includes(searchText))
         {
             addTaskInCategory(tasks);
             renderTaskCount(tasks);
