@@ -119,10 +119,10 @@ function addTaskInCategory(task)
     ticketContainerRef.innerHTML = `
         <div class="tickets">
             <div class="ticket-name">
-                <p style="font-weight: bold;">${task.taskName.length > 50 ? task.taskName.slice(0, 36) + ' ...' : task.taskName }</p>
+                <p style="font-weight: bold;">${task.taskName.length > 40 ? task.taskName.slice(0, 36) + ' ...' : task.taskName }</p>
             </div>
             <div class="ticket-description">
-                <p>${task.taskDescription}</p>
+                <p>${task.taskDescription > 40 ? task.taskDescription.slice(0, 36) + ' ...' : task.taskDescription}</p>
             </div>
             <div class="ticket-priority">
                 <i class="fa-solid fa-flag low" id="${task.priority}"></i>
